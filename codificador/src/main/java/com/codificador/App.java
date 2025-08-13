@@ -1,20 +1,31 @@
 package com.codificador;
 
-public class App {
-    public static void main(String[] args) throws Exception {
-        Codificador cod = new CodificadorSimples();
+import java.util.Scanner;
 
-        System.out.println("Codificador: "+cod.getNome());
-        System.out.println("Versao: "+cod.getDataCriacao());
-        System.out.println("Nivel de segurança: "+cod.getNivelSeguranca());
+public class App {
+    private static Scanner scan;
+    public static void main(String[] args) throws Exception {
+        scan = new Scanner(System.in);
         
-        String texto = "Este e o string a ser codificado";
+        System.out.println("\nQual é o nível de segurança que você precisa de 1 a 3?");
+        int nivel = scan.nextInt();
+
+        Codificador cod = Factory.createCodificador(nivel);
+
+        System.out.println("\nCodificador: "+cod.getNome());
+        System.out.println("\nVersao: "+cod.getDataCriacao());
+        System.out.println("\nNivel de segurança: "+cod.getNivelSeguranca());
+
+        System.out.println("\nQual é o texto a ser codificado?");
+        scan.nextLine();
+        String texto = scan.nextLine();
         String codificado = cod.codifica(texto);
         String decodificado = cod.decodifica(codificado);
 
-        System.out.println("Texto original: "+texto);
-        System.out.println("Texto codificado: "+codificado);
-        System.out.println("Texto decodificado: "+decodificado);
+        System.out.println("\nTexto original: "+texto);
+        System.out.println("\nTexto codificado: "+codificado);
+        System.out.println("\nTexto decodificado: "+decodificado);
 
+        scan.close();
     }
 }
