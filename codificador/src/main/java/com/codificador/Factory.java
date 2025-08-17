@@ -9,6 +9,9 @@ public class Factory {
             case 2 -> {
                 return new CodificadorASCII();
             }
+            case 3 -> {
+                return new CodificadorMorse();
+            }
             default -> throw new AssertionError();
         }
     }
