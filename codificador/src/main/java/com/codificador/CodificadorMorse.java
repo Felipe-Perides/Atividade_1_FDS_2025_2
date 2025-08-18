@@ -68,20 +68,20 @@ public class CodificadorMorse implements Codificador {
 
     @Override
     public String codifica(String texto) {
-        String codificad = "";
+        String coded = "";
         for (char c : texto.toCharArray()) {
             if (searchNodeRef(root, c) == null) {
                 continue;
             }
-            codificad += codifica(c) + " ";
+            coded += codifica(c) + " ";
         }
-        return codificad;
+        return coded;
     }
 
     @Override
-    public String decodifica(String codificad) {
+    public String decodifica(String coded) {
         String decoded = "";
-        String[] frase = codificad.split("  ");
+        String[] frase = coded.split("  ");
         for (String s : frase) {
             for (String str : s.split(" ")) {
                 decoded += decodifica(root, str);
@@ -112,17 +112,17 @@ public class CodificadorMorse implements Codificador {
     }
 
     private String codifica(char caracter) {
-        String codificad = "";
+        String coded = "";
         Node aux = searchNodeRef(root, caracter);
         while (aux.father != null) {
             if (aux.father.left == aux) {
-                codificad += ".";
+                coded += ".";
             } else {
-                codificad += "-";
+                coded += "-";
             }
             aux = aux.father;
         }
-        String result = new StringBuilder(codificad).reverse().toString();
+        String result = new StringBuilder(coded).reverse().toString();
         return result;
     }
 
